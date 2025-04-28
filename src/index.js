@@ -7,11 +7,16 @@ const PORT = process.env.PORT || 8000;
 const server = http.createServer(expressApp);
 
 async function startServer() {
-  await dbConnect();
+  try {
+    await dbConnect();
 
-  server.listen(PORT, () => {
-    console.log(`SERVER STARTED SUCCESSFULLY ON PORT NUMBER ${PORT}`);
-  });
-}
+    server.listen(PORT, () => {
+      console.log(`SERVER STARTED SUCCESSFULLY ON PORT NUMBER ${PORT}`);
+    });
+  } catch (error) {
+    console.log(`FAILED TO START THE SERVER: ${error}`);
+    process.exit(1); // Exit if DB connection fails
+  }
+}   
 
 startServer();
