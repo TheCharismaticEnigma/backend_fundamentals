@@ -10,6 +10,11 @@ async function startServer() {
   try {
     await dbConnect();
 
+    server.on("error", (error) => {
+      console.log("ERROR IN STARTING SERVER", error);
+      throw error;
+    });
+
     server.listen(PORT, () => {
       console.log(`SERVER STARTED SUCCESSFULLY ON PORT NUMBER ${PORT}`);
     });
@@ -17,6 +22,6 @@ async function startServer() {
     console.log(`FAILED TO START THE SERVER: ${error}`);
     process.exit(1); // Exit if DB connection fails
   }
-}   
+}
 
 startServer();
