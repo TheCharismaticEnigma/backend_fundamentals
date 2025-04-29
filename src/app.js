@@ -2,7 +2,7 @@
 
 import express, { urlencoded } from "express";
 import cors from "cors";
-import { PAYLOAD_LIMITS } from "./constants";
+import { PAYLOAD_LIMITS } from "./constants.js";
 
 import cookieParser from "cookie-parser";
 export const expressApp = express();
@@ -29,6 +29,6 @@ expressApp.use(
 );
 
 expressApp.use(cookieParser());
-expressApp.use(express.static());
+expressApp.use(express.static("public"));
 
 export default expressApp;
